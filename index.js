@@ -48,7 +48,7 @@ module.exports = function childrenOfPid(pid, callback) {
   var processLister;
   if (process.platform === 'win32') {
     // See also: https://github.com/nodejs/node-v0.x-archive/issues/2318
-    processLister = spawn('wmic.exe', ['PROCESS', 'GET', 'Name,ProcessId,ParentProcessId,Status']);
+    processLister = spawn('wmic.exe', ['PROCESS', 'GET', 'Name,ProcessId,ParentProcessId,Status'], { detached: false, windowsHide: true });
   } else {
     processLister = spawn('ps', ['-A', '-o', 'ppid,pid,stat,comm']);
   }
